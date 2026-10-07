@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.log
+service_config.json
+service_config.tmp
+.pytest_cache/
+.venv/
+runtime/
+models/
+*.gguf
+*.dll
+*.exe
+*.zip
+.DS_Store
+Thumbs.db

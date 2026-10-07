@@ -1,0 +1,9 @@
+{
+  "server_exe": "C:/Tools/llama.cpp/llama-server.exe",
+  "model_dir": "C:/ComfyUI/models/LLM/Qwen3-Omni",
+  "port": 8736,
+  "gpu_layers": 24,
+  "context_size": 4096,
+  "startup_timeout": 600,
+  "auto_start": true
+}

@@ -1,0 +1,224 @@
+{
+  "last_node_id": 5,
+  "last_link_id": 3,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadAudio",
+      "pos": [
+        30,
+        160
+      ],
+      "size": [
+        330,
+        170
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            1
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "title": "上传测试音频"
+    },
+    {
+      "id": 2,
+      "type": "QwenOmniAudioTagger",
+      "pos": [
+        420,
+        100
+      ],
+      "size": [
+        530,
+        610
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tags",
+          "type": "STRING",
+          "links": [
+            2
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "diagnostics",
+          "type": "STRING",
+          "links": [
+            3
+          ],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "QwenOmniAudioTagger"
+      },
+      "widgets_values": [
+        8736,
+        "请根据实际听到的声音为素材打标签，只输出一个 JSON 对象：\n{\"大类\":\"音乐/音效/环境声/人声/混合/未知\",\"子类\":[],\"声音特征\":[],\"建议用途\":[],\"音乐风格\":[],\"情绪\":[],\"乐器\":[],\"有人声\":false,\"描述\":\"\",\"待人工复核\":false}\n子类可参考：UI点击、UI确认、UI取消、UI报错、通知、拾取、转场、冲击、爆炸、脚步、机械、自然环境、背景音乐；没有合适标签时可填写其他或未知。\n区分可听见的声音特征与推测用途。无法确定的用途不要强行归类，设待人工复核为 true。非音乐的音乐风格和乐器字段可留空。不猜测作品名称、具体来源、精确 BPM 或制作设备。",
+        512,
+        0.2,
+        42,
+        "fixed",
+        600
+      ],
+      "title": "Qwen3-Omni Q4 音频打标（本地服务）"
+    },
+    {
+      "id": 3,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1030,
+        90
+      ],
+      "size": [
+        510,
+        470
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [],
+      "title": "分类结果 / 原始 JSON"
+    },
+    {
+      "id": 4,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1030,
+        600
+      ],
+      "size": [
+        510,
+        340
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [],
+      "title": "耗时 / token / JSON 检查"
+    },
+    {
+      "id": 5,
+      "type": "Note",
+      "pos": [
+        30,
+        400
+      ],
+      "size": [
+        330,
+        330
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "Note"
+      },
+      "widgets_values": [
+        "首次使用：重启 ComfyUI 并刷新网页。\n\n在右下角 Qwen Omni 浮窗中填写 llama-server 完整路径和模型目录，保存配置。主模型和音频 mmproj 都必须准备好。\n\n默认启用工作流自动启动，端口 8736。上传一个短音效后点击运行。\n\n外部手动服务先在原终端 Ctrl+C 关闭，再由浮窗托管。Windows 托管服务随 ComfyUI 后端退出。\n\nShow Text 依赖 ComfyUI-Custom-Scripts。完整下载与操作说明见本插件 README.md。"
+      ],
+      "title": "测试前准备"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "AUDIO"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "STRING"
+    ],
+    [
+      3,
+      2,
+      1,
+      4,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8,
+      "offset": [
+        20,
+        20
+      ]
+    }
+  },
+  "version": 0.4
+}
